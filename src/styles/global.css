@@ -5,55 +5,88 @@
  */
 
 /*
-  Dark theme: blue-gray background, burnt orange accent.
+  Dark theme, monochrome: neutral grays, no accent color, system font.
+  A matching light version follows the visitor's device setting (see below).
+  Links are only slightly brighter than body text, so they always keep
+  an underline (that's what marks them as links).
+
   The starter's variable names are kept so its components still work,
-  but in a dark theme some names no longer describe the color:
-  --black is now the lightest text (headings), --gray-dark is body text,
-  and --gray-light is a dark border tone.
+  but in the dark theme some names no longer describe the color:
+  --black is the lightest text (headings), --gray-dark is body text,
+  and --gray-light is a dark border tone. (In the light version they
+  mean what they say again.)
   Variables ending in RGB numbers (no #) are used as rgb(var(--name)).
 */
 :root {
 	color-scheme: dark;
 
-	--bg: 26, 32, 41; /* #1A2029 page background */
-	--surface: 35, 43, 54; /* #232B36 cards, inline code */
-	--umber: #8a3324; /* fills behind white text only */
-	--accent-hover: #f0935c;
+	--bg: 18, 18, 18; /* #121212 page background */
+	--surface: 28, 28, 28; /* #1C1C1C header, footer, inline code */
+	--accent-hover: #ffffff;
 
-	--accent: #e07a3f;
-	--accent-dark: #f0935c; /* "stronger" accent: lighter on a dark theme */
-	--black: 242, 244, 247; /* #F2F4F7 headings */
-	--gray: 154, 165, 180; /* #9AA5B4 muted text */
-	--gray-light: 50, 61, 75; /* #323D4B borders, rules */
-	--gray-dark: 230, 233, 238; /* #E6E9EE body text */
+	--accent: #f5f5f5; /* links, active nav, blockquote bar */
+	--accent-dark: #ffffff;
+	--black: 245, 245, 245; /* #F5F5F5 headings */
+	--gray: 150, 150, 150; /* #969696 muted text */
+	--gray-light: 46, 46, 46; /* #2E2E2E borders, rules */
+	--gray-dark: 214, 214, 214; /* #D6D6D6 body text */
 	--gray-gradient: rgb(var(--surface)), rgb(var(--bg));
 	--box-shadow:
-		0 2px 6px rgba(0, 0, 0, 30%), 0 8px 24px rgba(0, 0, 0, 35%),
-		0 16px 32px rgba(0, 0, 0, 35%);
+		0 2px 6px rgba(0, 0, 0, 40%), 0 8px 24px rgba(0, 0, 0, 45%),
+		0 16px 32px rgba(0, 0, 0, 45%);
 }
 ::selection,
 mark {
-	background: rgba(224, 122, 63, 35%);
+	background: rgba(255, 255, 255, 22%);
 	color: rgb(var(--black));
 }
+/*
+  Light version, used automatically when the visitor's device is set to light
+  mode (dark stays the default). Same monochrome approach, inverted.
+*/
+@media (prefers-color-scheme: light) {
+	:root {
+		color-scheme: light;
+
+		--bg: 255, 255, 255; /* #FFFFFF page background */
+		--surface: 242, 242, 242; /* #F2F2F2 inline code */
+		--accent-hover: #000000;
+
+		--accent: #111111; /* links, active nav, blockquote bar */
+		--accent-dark: #000000;
+		--black: 17, 17, 17; /* #111111 headings */
+		--gray: 102, 102, 102; /* #666666 muted text */
+		--gray-light: 224, 224, 224; /* #E0E0E0 borders, rules */
+		--gray-dark: 43, 43, 43; /* #2B2B2B body text */
+		--box-shadow:
+			0 2px 6px rgba(0, 0, 0, 8%), 0 8px 24px rgba(0, 0, 0, 10%),
+			0 16px 32px rgba(0, 0, 0, 10%);
+	}
+	::selection,
+	mark {
+		background: rgba(0, 0, 0, 12%);
+	}
+}
 body {
-	font-family: var(--font-atkinson);
+	/* System font: San Francisco on Apple devices, Segoe UI on Windows, Roboto on Android */
+	font-family:
+		-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+	-webkit-font-smoothing: antialiased;
 	margin: 0;
 	padding: 0;
 	text-align: left;
-	background: linear-gradient(var(--gray-gradient)) no-repeat rgb(var(--bg));
-	background-size: 100% 600px;
+	background: rgb(var(--bg));
 	word-wrap: break-word;
 	overflow-wrap: break-word;
 	color: rgb(var(--gray-dark));
-	font-size: 20px;
-	line-height: 1.7;
+	font-size: 18px;
+	line-height: 1.65;
 }
 main {
-	width: 720px;
+	width: 640px;
 	max-width: calc(100% - 2em);
 	margin: auto;
-	padding: 3em 1em;
+	padding: 6em 1em 3em;
 }
 h1,
 h2,
@@ -63,32 +96,37 @@ h5,
 h6 {
 	margin: 0 0 0.5rem 0;
 	color: rgb(var(--black));
-	line-height: 1.2;
+	font-weight: 600;
+	line-height: 1.25;
+	letter-spacing: -0.01em;
 }
 h1 {
-	font-size: 3.052em;
+	font-size: 2.2em;
 }
 h2 {
-	font-size: 2.441em;
+	font-size: 1.6em;
 }
 h3 {
-	font-size: 1.953em;
+	font-size: 1.3em;
 }
 h4 {
-	font-size: 1.563em;
+	font-size: 1.1em;
 }
 h5 {
-	font-size: 1.25em;
+	font-size: 1em;
 }
 strong,
 b {
-	font-weight: 700;
+	font-weight: 600;
 }
 a {
 	color: var(--accent);
+	text-decoration-color: rgba(var(--black), 45%);
+	text-underline-offset: 0.15em;
 }
 a:hover {
 	color: var(--accent-hover);
+	text-decoration-color: currentColor;
 }
 p {
 	margin-bottom: 1em;
@@ -123,6 +161,14 @@ pre {
 pre > code {
 	all: unset;
 }
+/* Code blocks: Astro highlights them with the colorful github-dark theme.
+   Render them in grayscale on the surface color to match the monochrome theme.
+   Delete this rule to bring the syntax colors back. */
+pre.astro-code {
+	/* Stays dark in light mode too: the highlighter's text colors are made for a dark background. */
+	background-color: #1c1c1c !important;
+	filter: grayscale(1);
+}
 blockquote {
 	border-left: 4px solid var(--accent);
 	padding: 0 0 0 20px;
@@ -135,10 +181,10 @@ hr {
 }
 @media (max-width: 720px) {
 	body {
-		font-size: 18px;
+		font-size: 17px;
 	}
 	main {
-		padding: 1em;
+		padding: 3em 1em 2em;
 	}
 }
 

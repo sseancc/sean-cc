@@ -6,12 +6,15 @@ import HeaderLink from './HeaderLink.astro';
 <header>
 	<nav>
 		<h2><a href="/">{SITE_TITLE}</a></h2>
-		<div class="internal-links">
+		{/* Nav links hidden until there are sections. Restore by removing this comment.
+<div class="internal-links">
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="/blog">Blog</HeaderLink>
 			<HeaderLink href="/about">About</HeaderLink>
 		</div>
-		<div class="social-links">
+*/}
+		{/* Social links hidden: these pointed at Astro's accounts. Replace hrefs with yours to restore.
+<div class="social-links">
 			<a href="https://m.webtoo.ls/@astro" target="_blank">
 				<span class="sr-only">Follow Astro on Mastodon</span>
 				<svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32"
@@ -40,14 +43,14 @@ import HeaderLink from './HeaderLink.astro';
 				>
 			</a>
 		</div>
+*/}
 	</nav>
 </header>
 <style>
 	header {
 		margin: 0;
 		padding: 0 1em;
-		background: rgb(var(--surface));
-		box-shadow: 0 2px 8px rgba(0, 0, 0, 30%);
+		background: transparent;
 	}
 	h2 {
 		margin: 0;
@@ -62,6 +65,7 @@ import HeaderLink from './HeaderLink.astro';
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		min-height: 3.3em; /* keeps the bar's height while nav links are hidden */
 	}
 	nav a {
 		padding: 1em 0.5em;

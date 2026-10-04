@@ -1,7 +1,6 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 ---
 
@@ -11,39 +10,77 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
 	<body>
-		<Header />
+		{/* No header bar on the home page: the name in the lead line is the page title. */}
 		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
+			<h1 class="lead">
+				I'm <strong>Sean Sobieraj</strong>, a data architect focused on semantic models and knowledge
+				graphs for cybersecurity.
+			</h1>
+			<p class="links">
+				<a href="https://www.linkedin.com/in/sobieraj/" rel="me">LinkedIn</a>
+				<span aria-hidden="true">/</span>
+				<a href="https://github.com/sseancc" rel="me">GitHub</a>
+			</p>
+
 			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This template
-				serves as a lightweight, minimally-styled starting point for anyone looking to build a personal
-				website, blog, or portfolio with Astro.
+				Today I'm a Senior Data Architect at the Cybersecurity and Infrastructure Security Agency
+				(CISA), where I lead the Cybersecurity Division's data management initiative. I defined the
+				agency-wide tagging and metadata practices that make our data discoverable and consistent,
+				simplified our enterprise data model from hundreds of classes to a handful of intuitive
+				domains, and standardized cyber telemetry on a common open schema.
 			</p>
 			<p>
-				This template comes with a few integrations already configured in your{' '}
-				<code>astro.config.mjs</code> file. You can customize your setup with{' '}
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to{' '}
-				<a href="https://docs.astro.build/">read the docs</a>{' '}
-				or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
+				Just as much of the work is cultural: moving teams from building on raw data, where every
+				analysis starts with its own cleanup and stays tied to a single source, to building on
+				shared, curated data, where one analytic can run across many sources and be reused by other
+				teams.
 			</p>
 			<p>
-				Looking for a blog template with a bit more personality? Check out{' '}
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>{' '}
-				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
+				Before that, I spent eight years at CISA, where I designed and built the agency's malware
+				triage and reporting platform. It cut the time to first findings from days to minutes and
+				stayed in use for more than a decade. Later, I led a DevOps team building new tools for
+				threat hunting.
+			</p>
+			<p>
+				Earlier, I was a Duty Officer in the White House Situation Room at the National Security
+				Council, and before that I led the malware analysis team at US-CERT.
+			</p>
+			<p>
+				I started out in the U.S. Marine Corps, where I rose to sergeant and helped maintain a base
+				network serving 35,000 users. After a B.S. from the Rochester Institute of Technology, I
+				earned an M.S. in Information Security at Purdue University on a federal Scholarship for
+				Service, which led me to US-CERT. I'm also a CISSP.
 			</p>
 		</main>
 		<Footer />
 	</body>
 </html>
+
+<style>
+	.lead {
+		font-size: 1.45em;
+		font-weight: 400;
+		line-height: 1.35;
+		letter-spacing: -0.01em;
+		margin-bottom: 0.6rem;
+	}
+	.lead strong {
+		font-weight: 600;
+	}
+	.links {
+		margin: 0 0 2.5em;
+		color: rgb(var(--gray));
+		font-size: 0.9em;
+	}
+	.links span {
+		margin: 0 0.4em;
+	}
+	.links a {
+		color: rgb(var(--gray));
+		text-decoration: none;
+	}
+	.links a:hover {
+		color: var(--accent-hover);
+		text-decoration: underline;
+	}
+</style>

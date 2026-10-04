@@ -52,7 +52,7 @@ Edit published posts in the vault, not in the repo copy. Use lowercase-hyphenate
 
 ## Theme
 
-Dark blue-gray with a burnt orange accent. Colors are CSS variables at the top of `src/styles/global.css`.
+Monochrome dark theme with the system font (San Francisco on Macs). Colors are CSS variables at the top of `src/styles/global.css`, with a matching light version that follows the visitor's device setting. Code blocks are shown in grayscale by one CSS rule in the same file.
 The starter's variable names were kept, so some names no longer describe the color: `--black` is the lightest text (headings), `--gray-dark` is body text, and `--gray-light` is a dark border tone.
 
 ## Email DNS (currently set to "no email")

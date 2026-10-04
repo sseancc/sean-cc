@@ -3,8 +3,9 @@ const today = new Date();
 ---
 
 <footer>
-	&copy; {today.getFullYear()} Your name here. All rights reserved.
-	<div class="social-links">
+	&copy; {today.getFullYear()} Sean Sobieraj
+	{/* Social links hidden: these pointed at Astro's accounts. Replace hrefs with yours to restore.
+<div class="social-links">
 		<a href="https://m.webtoo.ls/@astro" target="_blank">
 			<span class="sr-only">Follow Astro on Mastodon</span>
 			<svg
@@ -38,13 +39,18 @@ const today = new Date();
 			>
 		</a>
 	</div>
+*/}
 </footer>
 <style>
 	footer {
-		padding: 2em 1em 6em 1em;
-		background: linear-gradient(var(--gray-gradient)) no-repeat;
+		/* Lines up with the content column; padding is 1.25em because the
+		   footer text is 0.8em, which makes it equal to main's 1em. */
+		width: 640px;
+		max-width: calc(100% - 2.5em);
+		margin: 0 auto;
+		padding: 2em 1.25em 4em;
 		color: rgb(var(--gray));
-		text-align: center;
+		font-size: 0.8em;
 	}
 	.social-links {
 		display: flex;

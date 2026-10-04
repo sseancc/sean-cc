@@ -1,63 +1,69 @@
-# Astro Starter Kit: Blog
+# sean.cc
+
+Personal website and writing home base: articles, resume, photography, and fitness.
+Built with [Astro](https://docs.astro.build) (blog starter) and deployed to Cloudflare Workers as a static site.
+
+## Run it locally
+
+Requires Node.js 22.12 or newer.
 
 ```sh
-npm create astro@latest -- --template blog
+npm install          # first time, or after package changes
+npm run dev          # http://localhost:4321
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+To test the production build the way Cloudflare serves it:
 
-Features:
-
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and Open Graph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-├── public/
-├── src/
-│   ├── assets/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
-├── astro.config.mjs
-├── README.md
-├── package.json
-└── tsconfig.json
+```sh
+npx astro build && npx wrangler dev
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Deploying
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+- A push to `main` builds and deploys to https://sean.cc automatically (Cloudflare Workers Builds).
+- Pushing any other branch creates a preview build. Use a branch for anything you want to look at before it goes live.
+- A failed build does not replace the live site. Build logs: Cloudflare dashboard, Worker `sean-cc`, Deployments.
+- `www.sean.cc` redirects to `sean.cc` with a Cloudflare Redirect Rule (not in this repo).
 
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
+## Working on two Macs
 
-Any static assets, like images, can be placed in the `public/` directory.
+`git pull` before starting, `git push` when done. The repo lives at `~/Code/sean-cc` on each machine, outside iCloud.
 
-## 🧞 Commands
+## Where things live
 
-All commands are run from the root of the project, from a terminal:
+| Path | What it is |
+| :--- | :--- |
+| `src/content/blog/` | Posts (Markdown or MDX) |
+| `src/pages/` | Pages; each file becomes a URL |
+| `src/components/` | Header, footer, and other shared pieces |
+| `src/styles/global.css` | Site-wide styles and the color palette |
+| `src/consts.ts` | Site title and description |
+| `public/` | Files served as-is (favicon, etc.); images here are not optimized |
+| `astro.config.mjs` | Astro settings, including `site: 'https://sean.cc'` |
+| `wrangler.jsonc` | Cloudflare Worker settings; `name` must stay `sean-cc` |
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## Writing workflow
 
-## 👀 Want to learn more?
+1. Draft in the Obsidian vault (iCloud, not in this repo).
+2. Move finished posts to the vault's `Published` folder.
+3. Copy them into `src/content/blog/`, then commit and push. *(A script to do the copying and convert Obsidian-only syntax is still on the to-do list.)*
 
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Edit published posts in the vault, not in the repo copy. Use lowercase-hyphenated filenames (`my-first-post.md`) with title and date in the front matter.
+
+## Theme
+
+Dark blue-gray with a burnt orange accent. Colors are CSS variables at the top of `src/styles/global.css`.
+The starter's variable names were kept, so some names no longer describe the color: `--black` is the lightest text (headings), `--gray-dark` is body text, and `--gray-light` is a dark border tone.
+
+## Email DNS (currently set to "no email")
+
+sean.cc has records that tell other servers it never sends or receives mail. Before using an @sean.cc address or sending a newsletter from it:
+
+1. Delete the null MX record (`MX @ 0 .`).
+2. Replace the SPF record (`v=spf1 -all`) with the provider's.
+3. Delete the empty `*._domainkey` record and add the provider's DKIM.
+4. Set DMARC to `p=none` while testing, then back to `p=reject`.
 
 ## Credit
 
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+The base styles come from [Bear Blog](https://github.com/HermanMartinus/bearblog/) (MIT license), by way of the Astro blog starter.
